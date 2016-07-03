@@ -1,14 +1,17 @@
-function domra() {
-    return function(strings, ...values) {
-        return strings.reduce((acc, str, index) => {
-            if (index > 0) {
-                if (values.length) {
-                    acc += values.shift();
-                }
-            }
+import Translator from "./translator/index";
 
-            return acc + str;
-        }, "");
+const defaultConfig = {
+    placeholderTag: "var",
+    placeholderAttibute: "data-domra-id"
+};
+
+function domra(config = {}) {
+    const conf = Object.assign(Object.create(null), defaultConfig, config);
+
+    return function(strings, ...values) {
+        const translator = new Translator(conf, () => false);
+        const { template, placeholders } = translator.translate(strings, values);
+        return template;
     };
 }
 
