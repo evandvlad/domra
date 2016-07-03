@@ -1,18 +1,20 @@
-function *idGenerator() {
+const generateId = (function() {
     let index = 0;
 
-    while(true) {
+    return function() {
         index += 1;
-        yield [Date.now(), index].join("--");
-    }
-}
+
+        return [
+            Date.now(),
+            Math.random().toString().slice(0, 32),
+            index
+        ].join("-");
+    };
+}());
 
 export default {
-    _idIterator: null,
-
     create(tag, attr) {
-        this._idIterator = this._idIterator || idGenerator();
-        const id = this._idIterator.next().value;
+        const id = generateId();
 
         return {
             id,

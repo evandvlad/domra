@@ -182,52 +182,26 @@
 
 /***/ },
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	var generateId = function () {
+	    var index = 0;
 
-	var _marked = [idGenerator].map(regeneratorRuntime.mark);
+	    return function () {
+	        index += 1;
 
-	function idGenerator() {
-	    var index;
-	    return regeneratorRuntime.wrap(function idGenerator$(_context) {
-	        while (1) {
-	            switch (_context.prev = _context.next) {
-	                case 0:
-	                    index = 0;
-
-	                case 1:
-	                    if (false) {
-	                        _context.next = 7;
-	                        break;
-	                    }
-
-	                    index += 1;
-	                    _context.next = 5;
-	                    return [Date.now(), index].join("--");
-
-	                case 5:
-	                    _context.next = 1;
-	                    break;
-
-	                case 7:
-	                case "end":
-	                    return _context.stop();
-	            }
-	        }
-	    }, _marked[0], this);
-	}
+	        return [Date.now(), Math.random().toString().slice(0, 32), index].join("-");
+	    };
+	}();
 
 	exports.default = {
-	    _idIterator: null,
-
 	    create: function create(tag, attr) {
-	        this._idIterator = this._idIterator || idGenerator();
-	        var id = this._idIterator.next().value;
+	        var id = generateId();
 
 	        return {
 	            id: id,
