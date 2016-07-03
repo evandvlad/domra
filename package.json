@@ -4,6 +4,10 @@
   "main": "src/index.js",
   "author": "evandvlad",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evandvlad/domra.git"
+  },
   "devDependencies": {
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
@@ -16,6 +20,7 @@
   "scripts": {
     "_compile-tests": "./node_modules/.bin/webpack test/specs/index.js ./test/all-specs.js --module-bind-pre \"js=babel?presets[]=es2015\"",
     "_run-mocha": "./node_modules/.bin/mocha-phantomjs -R min ./test/test-runner.html",
-    "test": "npm run _compile-tests && npm run _run-mocha"
+    "test": "npm run _compile-tests && npm run _run-mocha",
+    "after-deploy": "exit 0"
   }
 }
