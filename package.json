@@ -19,7 +19,7 @@
     "webpack": "^1.13.1"
   },
   "scripts": {
-    "_compile-tests": "./node_modules/.bin/webpack test/specs/index.js ./test/all-specs.js --module-bind-pre \"js=babel?presets[]=es2015\"",
+    "_compile-tests": "./node_modules/.bin/webpack --config ./webpack.config.js",
     "_run-mocha": "./node_modules/.bin/mocha-phantomjs -R min ./test/test-runner.html",
     "test": "npm run _compile-tests && npm run _run-mocha",
     "after-deploy": "exit 0"
