@@ -1,4 +1,5 @@
-import Translator from "./translator";
+import InputProcessor from "./input-processor";
+import OutputProcessor from "./output-processor";
 
 const defaultConfig = {
     placeholderTag: "var",
@@ -9,9 +10,10 @@ function domra(config = {}) {
     const conf = Object.assign(Object.create(null), defaultConfig, config);
 
     return function(strings, ...values) {
-        const translator = new Translator(conf);
-        const { template, placeholders } = translator.translate(strings, values);
-        return template;
+        const inputProcessor = new InputProcessor(conf);
+        const outputProcessor = new OutputProcessor(conf);
+        const { template, placeholders } = inputProcessor.process(strings, values);
+        return outputProcessor.process(template, placeholders);
     };
 }
 

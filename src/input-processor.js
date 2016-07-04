@@ -20,7 +20,7 @@ export default class {
         this._placeholders = new Map();
     }
 
-    translate(strings, values) {
+    process(strings, values) {
         return {
             template: this._createTemplate(strings, values),
             placeholders: this._placeholders
