@@ -1,4 +1,4 @@
-import domra from "../../src/index";
+import domra from "../src/index";
 
 import common from "./common";
 
