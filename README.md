@@ -1,1 +1,3 @@
 [![Build Status](https://travis-ci.org/evandvlad/domra.svg?branch=master)](https://travis-ci.org/evandvlad/domra)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/86cd6afa55f14c8ebb053df38e94a634)](https://www.codacy.com/app/evandvlad/domra?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=evandvlad/domra&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/86cd6afa55f14c8ebb053df38e94a634)](https://www.codacy.com/app/evandvlad/domra?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=evandvlad/domra&amp;utm_campaign=Badge_Coverage)

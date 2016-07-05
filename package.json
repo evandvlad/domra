@@ -14,6 +14,7 @@
     "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
     "chai": "^3.5.0",
+    "codacy-coverage": "^1.1.3",
     "eslint": "^3.0.1",
     "isparta": "^4.0.0",
     "isparta-loader": "^2.0.0",
@@ -30,7 +31,7 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint src/** test/**",
     "test": "npm run lint && npm run unit-tests",
-    "after-deploy": "exit 0",
+    "after-deploy": "cat ./coverage/lcov.info | codacy-coverage -t 059c9e5b489a4fabaa14a1e221ded5aa",
     "unit-tests": "./node_modules/.bin/karma start ./karma.config.js"
   }
 }
