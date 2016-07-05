@@ -36,4 +36,4 @@ export default function(domra) {
             assert.equal(domra() `${v1}-${v2}`, "test-1");
         });
     });
-};
+}

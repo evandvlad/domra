@@ -37,7 +37,7 @@ export default class {
     }
 
     _processValue(value) {
-        if (!this._isWrapper(value)){
+        if (!this._isWrapper(value)) {
             return value;
         }
 

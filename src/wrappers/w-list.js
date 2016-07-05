@@ -7,4 +7,4 @@ export default class extends WNode {
             return acc;
         }, document.createDocumentFragment());
     }
-};
+}
