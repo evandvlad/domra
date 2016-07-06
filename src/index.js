@@ -1,19 +1,21 @@
+import ElementsStore from "./elements-store";
 import InputProcessor from "./input-processor";
 import OutputProcessor from "./output-processor";
 
 const defaultConfig = {
     placeholderTag: "var",
-    placeholderAttibute: "data-domra-id"
+    placeholderAttribute: "data-domra-id"
 };
 
 function domra(config = {}) {
     const conf = Object.assign(Object.create(null), defaultConfig, config);
 
     return function(strings, ...values) {
-        const inputProcessor = new InputProcessor(conf);
+        const store = new ElementsStore();
+        const inputProcessor = new InputProcessor(store, conf);
         const outputProcessor = new OutputProcessor(conf);
-        const { template, placeholders } = inputProcessor.process(strings, values);
-        return outputProcessor.process(template, placeholders);
+        const template = inputProcessor.process(strings, values);
+        return outputProcessor.process(template, store);
     };
 }
 

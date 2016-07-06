@@ -1,33 +1,12 @@
 import WNode from "./wrappers/w-node";
 
-const generateId = (function() {
-    let index = 0;
-
-    return function() {
-        index += 1;
-
-        return [
-            Date.now(),
-            Math.random().toString().slice(0, 32),
-            index
-        ].join("-");
-    };
-}());
-
 export default class {
-    constructor(config) {
+    constructor(store, config) {
+        this._store = store;
         this._config = config;
-        this._placeholders = new Map();
     }
 
     process(strings, values) {
-        return {
-            template: this._createTemplate(strings, values),
-            placeholders: this._placeholders
-        };
-    }
-
-    _createTemplate(strings, values) {
         const vals = [...values];
 
         return strings.reduce((acc, str, index) => {
@@ -41,15 +20,14 @@ export default class {
             return value;
         }
 
-        const id = generateId();
-        this._placeholders.set(id, value.getDOMElement());
+        const token = this._store.put(value.getDOMElement());
 
-        return this._createPlaceholder(id);
+        return this._createPlaceholder(token);
     }
 
     _createPlaceholder(id) {
-        return `<${this._config.placeholderTag} ${this._config.placeholderAttibute}="${id}">
-            </${this._config.placeholderTag}>`;
+        const { placeholderTag: tag, placeholderAttribute: attr } = this._config;
+        return `<${ tag } ${ attr } = "${ id }"></${ tag }>`;
     }
 
     _isWrapper(value) {

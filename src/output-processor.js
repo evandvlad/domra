@@ -3,7 +3,7 @@ export default class {
         this._config = config;
     }
 
-    process(template, placeholders) {
+    process(template, store) {
         return template;
     }
 }
