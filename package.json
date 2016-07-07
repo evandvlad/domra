@@ -33,7 +33,7 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint src/** test/**",
     "test": "npm run lint && npm run unit-tests",
-    "after-deploy": "cat ./coverage/lcov.info | codacy-coverage -t 059c9e5b489a4fabaa14a1e221ded5aa",
+    "after-deploy": "cat ./coverage/lcov.info | codacy-coverage",
     "unit-tests": "./node_modules/.bin/karma start ./karma.config.js"
   }
 }
