@@ -21,7 +21,7 @@ module.exports = function(config) {
             [PATH_TO_TEST_DIR + "/**/*.js"]: ["webpack"],
             [PATH_TO_SRC_DIR + "/**/*.js"]: ["coverage"]
         },
-        reporters: ["progress", "coverage"],
+        reporters: ["mocha", "coverage"],
         webpack: {
             module: {
                 preLoaders: [
