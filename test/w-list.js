@@ -2,8 +2,9 @@ import { WList } from "../";
 import { assert } from "chai";
 
 describe("WList", () => {
-    function checkInstanceOf(dElement) {
+    function checkResultElement(dElement, childrenCount) {
         assert(dElement instanceof DocumentFragment);
+        assert.equal(dElement.childNodes.length, childrenCount);
     }
 
     describe("correct argument type", () => {
@@ -19,30 +20,19 @@ describe("WList", () => {
 
         it("array", () => {
             const wElement = new WList([document.createElement("p"), document.createElement("p")]);
-            const dElement = wElement.getDOMElement();
-
-            checkInstanceOf(dElement);
-            assert(dElement.childNodes.length, 2);
+            checkResultElement(wElement.getDOMElement(), 2);
         });
 
         it("HTMLCollection", () => {
             const testWrapperDOMElement = createTestDOMTree();
-
             const wElement = new WList(testWrapperDOMElement.getElementsByTagName("p"));
-            const dElement = wElement.getDOMElement();
-
-            checkInstanceOf(dElement);
-            assert(dElement.childNodes.length, 2);
+            checkResultElement(wElement.getDOMElement(), 2);
         });
 
         it("NodeList", () => {
             const testWrapperDOMElement = createTestDOMTree();
-
             const wElement = new WList(testWrapperDOMElement.querySelectorAll("p"));
-            const dElement = wElement.getDOMElement();
-
-            checkInstanceOf(dElement);
-            assert(dElement.childNodes.length, 2);
+            checkResultElement(wElement.getDOMElement(), 2);
         });
 
         it("iterator", () => {
@@ -51,28 +41,46 @@ describe("WList", () => {
                 yield document.createElement("p");
             }
 
-            const wElement = new WList(gen());
-            const dElement = wElement.getDOMElement();
-
-            checkInstanceOf(dElement);
-            assert(dElement.childNodes.length, 2);
+            checkResultElement(new WList(gen()).getDOMElement(), 2);
         });
 
         it("Arguments", () => {
             (function() {
-                const wElement = new WList(arguments);
-                const dElement = wElement.getDOMElement();
-
-                checkInstanceOf(dElement);
-                assert(dElement.childNodes.length, 2);
+                checkResultElement(new WList(arguments).getDOMElement(), 2);
             }(document.createElement("p"), document.createElement("p")));
         });
     });
 
-    it("empty list", () => {
-        const wElement = new WList([]);
-        const dElement = wElement.getDOMElement();
+    describe("incorrect argument type", () => {
+        [
+            { name: "null", testValue: null },
+            { name: "undefined" },
+            { name: "not empty string", testValue: "test" }
+        ].forEach(testItem => {
+            it(testItem.name, () => {
+                assert.throws(
+                    () => new WList(testItem.testValue).getDOMElement(),
+                    "can't correct process DOM elements"
+                );
+            });
+        });
+    });
 
-        checkInstanceOf(dElement);
+    describe("argument type convert to empty list", () => {
+        [
+            { name: "boolean true", testValue: true },
+            { name: "boolean false", testValue: false },
+            { name: "object", testValue: {a: 1, b: 2} },
+            { name: "function", testValue: () => {} },
+            { name: "number", testValue: 0 }
+        ].forEach(testItem => {
+            it(testItem.name, () => {
+                checkResultElement(new WList(testItem.testValue).getDOMElement(), 0);
+            });
+        });
+    });
+
+    it("empty list", () => {
+        checkResultElement(new WList([]).getDOMElement(), 0);
     });
 });

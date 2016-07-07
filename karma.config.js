@@ -23,11 +23,12 @@ module.exports = function(config) {
         },
         reporters: ["mocha", "coverage"],
         webpack: {
+            devtool: "eval",
             module: {
                 preLoaders: [
                     {
                         test: JS_FILE_REGEXP,
-                        exclude: PATH_TO_SRC_DIR,
+                        exclude: [PATH_TO_SRC_DIR, /node_modules/],
                         loader: "babel"
                     },
                     {
@@ -37,6 +38,9 @@ module.exports = function(config) {
                     }
                 ]
             }
+        },
+        webpackMiddleware: {
+            noInfo: true
         },
         coverageReporter: {
             dir: PATH_TO_COVERAGE_DIR,
