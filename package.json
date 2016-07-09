@@ -27,13 +27,13 @@
     "karma-phantomjs-launcher": "^1.0.1",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.5.3",
-    "phantomjs": "^2.1.7",
+    "phantomjs-prebuilt": "^2.1.7",
     "webpack": "^1.13.1"
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint src/** test/**",
-    "test": "npm run lint && npm run unit-tests",
-    "after-deploy": "cat ./coverage/lcov.info | codacy-coverage",
-    "unit-tests": "./node_modules/.bin/karma start ./karma.config.js"
+    "test": "npm run lint && npm run specs",
+    "after-deploy": "cat ./coverage/lcov.info | codacy-coverage -v",
+    "specs": "./node_modules/.bin/karma start ./karma.config.js"
   }
 }
