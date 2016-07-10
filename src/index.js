@@ -4,7 +4,9 @@ import OutputProcessor from "./output-processor";
 
 const defaultConfig = {
     placeholderTag: "var",
-    placeholderAttribute: "data-domra-id"
+    placeholderAttr: "data-domra-id",
+    wrapperTag: "div",
+    wrapperAttrs: Object.create(null)
 };
 
 function domra(config = {}) {

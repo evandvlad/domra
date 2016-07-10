@@ -4,26 +4,41 @@ export default class {
     }
 
     process(template, store) {
-        const rootElement = document.createElement("div");
+        const wrapperElement = this._createWrapperElement(template);
 
-        rootElement.innerHTML = template;
-
-        this._findPlaceholders(rootElement).forEach(placeholder => {
-            const token = placeholder.getAttribute(this._config.placeholderAttribute);
+        this._findPlaceholders(wrapperElement).forEach(placeholder => {
+            const token = placeholder.getAttribute(this._config.placeholderAttr);
             const wnode = store.pull(token);
             this._replacePlaceholder(placeholder, wnode);
         });
 
-        return rootElement.innerHTML;
+        return this._extractResult(wrapperElement);
+    }
+
+    _createWrapperElement(stringHtml) {
+        const { wrapperTag: tag, wrapperAttrs: attrs } = this._config;
+        const element = document.createElement(tag);
+
+        Object.keys(attrs).forEach(name => {
+            element.setAttribute(name, attrs[name]);
+        });
+
+        element.innerHTML = stringHtml;
+
+        return element;
     }
 
     _findPlaceholders(element) {
-        const { placeholderTag: tag, placeholderAttribute: attr } = this._config;
+        const { placeholderTag: tag, placeholderAttr: attr } = this._config;
         return Array.from(element.querySelectorAll(`${ tag }[${ attr }]`));
     }
 
     _replacePlaceholder(placeholder, wnode) {
         placeholder.parentNode.replaceChild(wnode.getDOMElement(), placeholder);
         return this;
+    }
+
+    _extractResult(wrapperElement) {
+        return wrapperElement.innerHTML;
     }
 }

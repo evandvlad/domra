@@ -26,7 +26,7 @@ export default class {
     }
 
     _createPlaceholder(id) {
-        const { placeholderTag: tag, placeholderAttribute: attr } = this._config;
+        const { placeholderTag: tag, placeholderAttr: attr } = this._config;
         return `<${ tag } ${ attr } = "${ id }"></${ tag }>`;
     }
 
