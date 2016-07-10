@@ -20,7 +20,7 @@ export default class {
             return value;
         }
 
-        const token = this._store.put(value.getDOMElement());
+        const token = this._store.put(value);
 
         return this._createPlaceholder(token);
     }

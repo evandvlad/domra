@@ -1,4 +1,4 @@
-import ElementsStore from "./elements-store";
+import WNodesStore from "./wnodes-strore";
 import InputProcessor from "./input-processor";
 import OutputProcessor from "./output-processor";
 
@@ -11,7 +11,7 @@ function domra(config = {}) {
     const conf = Object.assign(Object.create(null), defaultConfig, config);
 
     return function(strings, ...values) {
-        const store = new ElementsStore();
+        const store = new WNodesStore();
         const inputProcessor = new InputProcessor(store, conf);
         const outputProcessor = new OutputProcessor(conf);
         const template = inputProcessor.process(strings, values);

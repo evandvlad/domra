@@ -17,20 +17,20 @@ export default class {
         this._store = Object.create(null);
     }
 
-    put(element) {
+    put(wnode) {
         const token = generateToken();
-        this._store[token] = element;
+        this._store[token] = wnode;
         return token;
     }
 
     pull(token) {
         if (!this._store[token]) {
-            throw new Error(`Not found element for token: "${token}"`);
+            throw new Error(`Not found wnode for token: "${token}"`);
         }
 
-        const element = this._store[token];
+        const wnode = this._store[token];
         delete this._store[token];
 
-        return element;
+        return wnode;
     }
 }
