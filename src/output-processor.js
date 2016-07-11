@@ -1,10 +1,26 @@
+const resultFormattersMap = new Map([
+    ["string", rootElement => rootElement.innerHTML],
+    ["wrapper", rootElement => rootElement],
+    ["first-node", rootElement => rootElement.childNodes[0]],
+    ["node-array", rootElement => Array.from(rootElement.childNodes || [])],
+    ["fragment", rootElement => {
+        const children = Array.from(rootElement.childNodes || []);
+        const frag = document.createDocumentFragment();
+
+        return children.reduce((acc, child) => {
+            acc.appendChild(child);
+            return acc;
+        }, frag);
+    }]
+]);
+
 export default class {
     constructor(config) {
         this._config = config;
     }
 
-    process(template, store) {
-        const wrapperElement = this._createWrapperElement(template);
+    process(content, store) {
+        const wrapperElement = this._createWrapperElement(content);
 
         this._findPlaceholders(wrapperElement).forEach(placeholder => {
             const token = placeholder.getAttribute(this._config.placeholderAttr);
@@ -15,7 +31,7 @@ export default class {
         return this._extractResult(wrapperElement);
     }
 
-    _createWrapperElement(stringHtml) {
+    _createWrapperElement(content) {
         const { wrapperTag: tag, wrapperAttrs: attrs } = this._config;
         const element = document.createElement(tag);
 
@@ -23,7 +39,7 @@ export default class {
             element.setAttribute(name, attrs[name]);
         });
 
-        element.innerHTML = stringHtml;
+        element.innerHTML = content;
 
         return element;
     }
@@ -39,6 +55,20 @@ export default class {
     }
 
     _extractResult(wrapperElement) {
-        return wrapperElement.innerHTML;
+        const format = this._config.outputFormat;
+
+        if (typeof format === "string") {
+            if (resultFormattersMap.has(format)) {
+                return resultFormattersMap.get(format)(wrapperElement);
+            }
+
+            throw new Error(`unknown outputFormat value: "${ format }"`);
+        }
+
+        if (typeof format === "function") {
+            return format(wrapperElement);
+        }
+
+        throw new Error("outputFormat must be string or function");
     }
 }

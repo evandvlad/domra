@@ -6,7 +6,8 @@ const defaultConfig = {
     placeholderTag: "var",
     placeholderAttr: "data-domra-id",
     wrapperTag: "div",
-    wrapperAttrs: Object.create(null)
+    wrapperAttrs: Object.create(null),
+    outputFormat: "string"
 };
 
 function domra(config = {}) {
