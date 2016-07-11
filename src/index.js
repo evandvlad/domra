@@ -7,7 +7,7 @@ const defaultConfig = {
     placeholderAttr: "data-domra-id",
     wrapperTag: "div",
     wrapperAttrs: Object.create(null),
-    outputFormat: "string"
+    outputFormat: "first-node"
 };
 
 function domra(config = {}) {
