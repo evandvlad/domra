@@ -23,14 +23,13 @@ export default class {
         return token;
     }
 
-    pull(token) {
-        if (!this._store[token]) {
-            throw new Error(`Not found wnode for token: "${token}"`);
-        }
+    has(token) {
+        return !!this._store[token];
+    }
 
+    pull(token) {
         const wnode = this._store[token];
         delete this._store[token];
-
         return wnode;
     }
 }

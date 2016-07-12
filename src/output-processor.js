@@ -21,8 +21,11 @@ export default class {
 
         this._findPlaceholders(wrapperElement).forEach(placeholder => {
             const token = placeholder.getAttribute(this._config.placeholderAttr);
-            const wnode = store.pull(token);
-            this._replacePlaceholder(placeholder, wnode);
+
+            if (store.has(token)) {
+                const wnode = store.pull(token);
+                this._replacePlaceholder(placeholder, wnode);
+            }
         });
 
         return this._extractResult(wrapperElement);
