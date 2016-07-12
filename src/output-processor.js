@@ -1,16 +1,13 @@
 const resultFormattersMap = new Map([
-    ["string", rootElement => rootElement.innerHTML],
+    ["string", ({ innerHTML }) => innerHTML],
     ["wrapper", rootElement => rootElement],
-    ["first-node", rootElement => rootElement.childNodes[0]],
-    ["node-array", rootElement => Array.from(rootElement.childNodes || [])],
-    ["fragment", rootElement => {
-        const children = Array.from(rootElement.childNodes || []);
-        const frag = document.createDocumentFragment();
-
-        return children.reduce((acc, child) => {
+    ["first-node", ({ childNodes }) => childNodes.length ? childNodes[0] : document.createTextNode("")],
+    ["node-array", ({ childNodes }) => Array.from(childNodes)],
+    ["fragment", ({ childNodes }) => {
+        return Array.from(childNodes).reduce((acc, child) => {
             acc.appendChild(child);
             return acc;
-        }, frag);
+        }, document.createDocumentFragment());
     }]
 ]);
 

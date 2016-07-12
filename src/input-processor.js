@@ -9,10 +9,14 @@ export default class {
     process(strings, values) {
         const vals = [...values];
 
-        return strings.reduce((acc, str, index) => {
+        const result = strings.reduce((acc, str, index) => {
             const val = index > 0 && vals.length ? this._processValue(vals.shift()) : "";
             return acc + val + str;
         }, "");
+
+        return this._config.trimString ?
+            result.trim() :
+            result;
     }
 
     _processValue(value) {
