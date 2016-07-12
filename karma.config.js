@@ -14,7 +14,7 @@ module.exports = function(config) {
         browsers: ["PhantomJS"],
         files: [
             PATH_TO_POLYFILL_FILE,
-            PATH_TO_TEST_DIR + "/**/*.js"
+            PATH_TO_TEST_DIR + "/specs/**/*.js"
         ],
         frameworks: ["mocha"],
         preprocessors: {
