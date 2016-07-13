@@ -1,3 +1,5 @@
+/* global describe, it */
+
 import { WNode, WElement, WList } from "../../";
 import { assert } from "chai";
 import { createElement } from "../helpers/dom-builder";

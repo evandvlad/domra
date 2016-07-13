@@ -1,3 +1,5 @@
+/* global describe, it */
+
 import domra, { WElement, WList } from "../../";
 import { assert } from "chai";
 import { createElement, createTree } from "../helpers/dom-builder";

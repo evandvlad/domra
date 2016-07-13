@@ -1,8 +1,5 @@
 {
     "env": {
-        "browser": true,
-        "phantomjs": true,
-        "mocha" : true,
         "es6": true
     },
     "ecmaFeatures": {

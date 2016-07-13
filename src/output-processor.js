@@ -1,3 +1,5 @@
+/* global document */
+
 const resultFormattersMap = new Map([
     ["string", ({ innerHTML }) => innerHTML],
     ["wrapper", rootElement => rootElement],

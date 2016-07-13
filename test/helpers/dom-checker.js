@@ -1,3 +1,5 @@
+/* global Text, Element, DocumentFragment */
+
 import { assert } from "chai";
 
 export function checkTextNode(node, text) {

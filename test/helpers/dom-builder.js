@@ -1,3 +1,5 @@
+/* global document */
+
 export function createElement(tag, html = "") {
     const element = document.createElement(tag);
     element.innerHTML = html;

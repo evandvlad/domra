@@ -1,3 +1,5 @@
+/* global describe, it */
+
 import { WList } from "../../";
 import { assert } from "chai";
 import { checkFragment } from "../helpers/dom-checker";

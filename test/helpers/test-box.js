@@ -1,3 +1,5 @@
+/* global it */
+
 export default class {
     constructor(boxName, test) {
         this._boxName = boxName;

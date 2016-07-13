@@ -1,3 +1,5 @@
+/* global describe, it, Event */
+
 import domra, { WElement, WList } from "../../";
 import { checkTextNode, checkElement } from "../helpers/dom-checker";
 import { createElement } from "../helpers/dom-builder";
