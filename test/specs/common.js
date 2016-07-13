@@ -3,6 +3,7 @@
 import domra, { WElement, WList } from "../../";
 import { checkTextNode, checkElement } from "../helpers/dom-checker";
 import { createElement } from "../helpers/dom-builder";
+import { assert } from "chai";
 
 describe("common", () => {
     it("single text", () => {
@@ -107,6 +108,15 @@ describe("common", () => {
         const span = createElement("span", "test");
         const result = domra() `<div>${ new WList([span, span]) }</div>`;
         checkElement(result, "div", "<span>test</span>");
+    });
+
+    it("correct process placeholders", () => {
+        const div = createElement("var", "test");
+        div.setAttribute("data-domra-id", "987654321");
+        const result = domra() `<var data-domra-id="123456789">${ new WElement(div) }</var>`;
+        
+        checkElement(result, "var", "<var data-domra-id=\"987654321\">test</var>");
+        assert.equal(result.getAttribute("data-domra-id"), "123456789");
     });
 
     it("complex markup", () => {

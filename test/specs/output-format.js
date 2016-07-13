@@ -508,4 +508,34 @@ describe("output-format", () => {
             });
         });
     });
+
+    describe("wrapper markup options", () => {
+        it("tag name", () => {
+            const result = domra({ outputFormat: "wrapper", wrapperTag: "template" }) `test`;
+            checkElement(result, "template", "test");
+        });
+
+        it("tag attributes", () => {
+            const result1 = domra({ outputFormat: "wrapper" }) `test`;
+            const result2 = domra({ outputFormat: "wrapper", wrapperAttrs: { id: "template" } }) `test`;
+
+            checkElement(result1, "div", "test");
+            checkElement(result2, "div", "test");
+
+            assert.equal(result1.id, "");
+            assert.equal(result2.id, "template");
+        });
+    });
+
+    describe("output trimming", () => {
+        it("with trimming", () => {
+            const result = domra() ` <div>test</div> `;
+            checkElement(result, "div", "test");
+        });
+
+        it("without trimming", () => {
+            const result = domra({ trimString: false }) ` <div>test</div> `;
+            checkTextNode(result, " ");
+        });
+    });
 });

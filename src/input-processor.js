@@ -14,9 +14,7 @@ export default class {
             return acc + val + str;
         }, "");
 
-        return this._config.trimString ?
-            result.trim() :
-            result;
+        return this._postProcessResult(result);
     }
 
     _processValue(value) {
@@ -36,5 +34,9 @@ export default class {
 
     _isWrapper(value) {
         return value instanceof WNode;
+    }
+
+    _postProcessResult(result) {
+        return this._config.trimString ? result.trim() : result;
     }
 }
