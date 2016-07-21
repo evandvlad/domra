@@ -1,3 +1,5 @@
+/* global require, module, __dirname */
+
 const path = require("path");
 
 const PATH_TO_SRC_DIR = path.resolve(__dirname, "src");
