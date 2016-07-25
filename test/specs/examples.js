@@ -31,4 +31,15 @@ describe("examples", () => {
         assert(textNode.getDOMElement() instanceof Text);
         assert.equal(textNode.getDOMElement().nodeValue, "Hello world");
     });
+
+    it("ex-3", () => {
+        document.body.innerHTML = "";
+
+        const element = document.createElement("p");
+        element.innerHTML = "Hello world";
+        document.body.innerHTML = domra({ outputFormat: "string" }) `${ new WElement(element) }`;
+
+        assert.equal(document.body.innerHTML, "<p>Hello world</p>");
+        document.body.innerHTML = "";
+    });
 });

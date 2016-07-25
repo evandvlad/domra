@@ -50,4 +50,14 @@ textNode instanceof WNode // true
 textNode.getDOMElement() instanceof Text // true 
 textNode.getDOMElement().nodeValue === "Hello world" // true
 ``` 
- 
+# Основной компонент
+
+Основной компонент, импортированный как default, представляет собой функцию возвращающую функцию обрабатывающую тегированные шаблонные строки. 
+Этой функции в качестве опционального параметра можно передать объект конфигурации, с помощью которого можно настроить вывод результата, его обработку и т.д.
+
+``` javascript
+const domra, { WElement } from "../domra";
+const element = document.createElement("p");
+element.innerHTML = "Hello world";
+document.body.innerHTML = domra({ outputFormat: "string" }) `${ new WElement(element) }`;
+```
