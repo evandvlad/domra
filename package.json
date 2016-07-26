@@ -1,6 +1,7 @@
 {
   "name": "domra",
-  "version": "1.0.0",
+  "version": "0.0.1",
+  "description": "library for working with new tagged template strings & DOM elements",
   "main": "src/index.js",
   "author": "evandvlad",
   "license": "MIT",
